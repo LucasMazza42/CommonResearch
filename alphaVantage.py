@@ -1,5 +1,5 @@
 import requests
-
+import pandas
 def get_daily_time_series(stock_symbol, api_key):
     # Base URL for Alpha Vantage API
     base_url = "https://www.alphavantage.co/query"
@@ -19,7 +19,7 @@ def get_daily_time_series(stock_symbol, api_key):
     if response.status_code == 200:
         # Convert the response to JSON
         data = response.json()
-        
+        print(data)
         # You can then process this data as needed
         return data
     else:

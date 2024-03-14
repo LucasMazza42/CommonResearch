@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CommonResearch</title>
+    <link rel="stylesheet" href="static/styles/research_style.css">
+</head>
+
+<body>
+    <div class = "search">
+        <label for="ticker">Enter Ticker:</label>
+        <input type="text" id="ticker" name="ticker">
+        <button onclick="searchStock()">Search</button>
+    </div>
+
+</body>
+<script>
+    function searchStock() {
+        var ticker = document.getElementById("ticker").value;
+        console.log("Searching for stock with ticker:", ticker);
+        
+        // Make an AJAX request to Flask to trigger the Python script
+        fetch('/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'ticker=' + encodeURIComponent(ticker)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+</html>
