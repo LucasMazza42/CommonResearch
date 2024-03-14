@@ -1,5 +1,10 @@
 import requests
 import pandas
+
+
+API_key = "6EVG2MQLPARM4YKW"
+
+
 def get_daily_time_series(stock_symbol, api_key):
     # Base URL for Alpha Vantage API
     base_url = "https://www.alphavantage.co/query"
@@ -26,6 +31,12 @@ def get_daily_time_series(stock_symbol, api_key):
         # Handle errors (e.g., invalid API key, wrong stock symbol)
         return None
 
-# Example usage:
-API_key = "6EVG2MQLPARM4YKW"
+
+def get_income_statement(ticker, API_key):
+    url = f'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={ticker}&apikey={API_key}'
+    response = requests.get(url)
+    data = response.json()
+    return data
+
+
 
